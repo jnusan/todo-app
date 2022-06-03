@@ -7,7 +7,11 @@ export const Task = (props:ITaskProp) => {
     <View style={styles.item}>
       <View style={styles.itemLeft}>
         <TouchableOpacity style={styles.square}></TouchableOpacity>
-        <Text style={styles.itemText}>{props.name}</Text>
+        {
+          props.isDone 
+            ? <Text style={[styles.itemText, styles.taskDone]}>{props.name}</Text>
+            : <Text style={styles.itemText}>{props.name}</Text>
+        }
       </View>
       <View style={styles.circular}></View>
     </View>
@@ -39,7 +43,9 @@ const styles = StyleSheet.create({
   },
   itemText: {
     maxWidth:'80%',
-
+  },
+  taskDone: {
+    textDecorationLine: 'line-through'
   },
   circular: {
     width: 15,
