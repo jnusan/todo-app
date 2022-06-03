@@ -1,10 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
-interface ITaskProp {
-  name: string,
-  isDone: boolean
-}
+import { ITaskProp } from '../interfaces/ITaskProp';
 
 export const Task = (props:ITaskProp) => {
   return (
