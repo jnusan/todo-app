@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import todoList from './data/todoList.json';
 import { Task } from './src/components/task';
 import { ITaskProp } from './src/interfaces/ITaskProp';
@@ -12,9 +12,18 @@ export default function App() {
   const [tasks, setTasks] = useState<ITaskProp[]>(todoList);
 
   const handleAddTask = () => {
+    Keyboard.dismiss();
     setTasks([...tasks, task]);
     setTask({name: '', isDone: false});
   };
+
+  const completeTask = (index: number) => {
+    let tasksCopy = [...tasks];
+    let currentTask = tasksCopy[index];
+    currentTask.isDone = !currentTask.isDone;
+    tasksCopy[index] = currentTask;
+    setTasks(tasksCopy);
+  }
 
   return (
     <View style={styles.container}>
@@ -23,7 +32,11 @@ export default function App() {
         <View style={styles.items}>
           {
             tasks.map((x, i) => {
-              return <Task name={x.name} isDone={x.isDone} key={i}></Task>
+              return (
+                <TouchableOpacity key={i} onPress={() =>completeTask(i)}>
+                  <Task name={x.name} isDone={x.isDone}></Task>
+                </TouchableOpacity>
+              ) 
             })
           }
         </View>
