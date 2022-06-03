@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Continue with React Native course",
+    "isDone": false
+  },
+  {
+    "name": "Read 10 pages of a book",
+    "isDone": true
+  }
+]
